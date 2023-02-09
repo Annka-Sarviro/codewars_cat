@@ -66,25 +66,45 @@ function repeatStr(n, s) {
 }
 
 // -----------------------------//
-// A pangram is a sentence that contains every single letter of the alphabet at least once. 
+// A pangram is a sentence that contains every single letter of the alphabet at least once.
 // For example, the sentence "The quick brown fox jumps over the lazy dog" is a pangram, because it uses the letters A-Z at least once (case is irrelevant).
-// Given a string, detect whether or not it is a pangram. 
+// Given a string, detect whether or not it is a pangram.
 // Return True if it is, False if not. Ignore numbers and punctuation.
 
-function isPangram(string){
-  let alfabet = "abcdefghijklmnopqrstuvwxyz"
+function isPangram(string) {
+  let alfabet = 'abcdefghijklmnopqrstuvwxyz'
   let arr = string.toLowerCase().split('')
-  let filteredArr = arr.filter((val, index, array)=> array.indexOf(val)===index)
-  let res= filteredArr.reduce((acc, val, i)=> {
-    alfabet.includes(val) ? acc = acc + 1 : acc=acc
-    return acc},0)
-  
+  let filteredArr = arr.filter(
+    (val, index, array) => array.indexOf(val) === index,
+  )
+  let res = filteredArr.reduce((acc, val, i) => {
+    alfabet.includes(val) ? (acc = acc + 1) : (acc = acc)
+    return acc
+  }, 0)
+
   return res === alfabet.length ? true : false
 }
 
 // ore
-function isPangrams(string){
+function isPangrams(string) {
   return 'abcdefghijklmnopqrstuvwxyz'
     .split('')
-    .every((x) => string.toLowerCase().includes(x));
+    .every((x) => string.toLowerCase().includes(x))
+}
+
+// ----------------------//
+// In a small town the population is p0 = 1000 at the beginning of a year.
+// The population regularly increases by 2 percent per year and moreover 50 new inhabitants per year come to live in the town.
+// How many years does the town need to see its population greater or equal to p = 1200 inhabitants?
+
+function nbYear(p0, percent, aug, p) {
+  let pp = p0
+  for (let i = 1; i <= p; i += 1) {
+    let year = Math.floor(pp + (pp * percent) / 100 + aug)
+    if (year >= p) {
+      return i
+    } else {
+      pp = year
+    }
+  }
 }
