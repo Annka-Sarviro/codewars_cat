@@ -108,3 +108,21 @@ function nbYear(p0, percent, aug, p) {
     }
   }
 }
+
+// Examples:
+// accum("abcd") -> "A-Bb-Ccc-Dddd"
+// accum("RqaEzty") -> "R-Qq-Aaa-Eeee-Zzzzz-Tttttt-Yyyyyyy"
+// accum("cwAt") -> "C-Ww-Aaa-Tttt"
+
+function accum(s) {
+  let arr = s.split('')
+  let res = [arr[0].toUpperCase()]
+  for (let i=1; i<arr.length; i+=1){
+    res.push('-')
+    res.push(arr[i].toUpperCase())
+    res.push(arr[i].repeat(i).toLowerCase())
+  }
+  
+  return res.join('')
+	// your code
+}
