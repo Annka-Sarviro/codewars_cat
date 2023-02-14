@@ -117,14 +117,14 @@ function nbYear(p0, percent, aug, p) {
 function accum(s) {
   let arr = s.split('')
   let res = [arr[0].toUpperCase()]
-  for (let i=1; i<arr.length; i+=1){
+  for (let i = 1; i < arr.length; i += 1) {
     res.push('-')
     res.push(arr[i].toUpperCase())
     res.push(arr[i].repeat(i).toLowerCase())
   }
-  
+
   return res.join('')
-	// your code
+  // your code
 }
 // -----------------------------------//
 // Write a method that takes an array of consecutive (increasing) letters as input and that returns the missing letter in the array.
@@ -134,14 +134,14 @@ function accum(s) {
 // ['a','b','c','d','f'] -> 'e'
 // ['O','Q','R','S'] -> 'P'
 
-function findMissingLetter(array)
-{
+function findMissingLetter(array) {
   const alfabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  for(let i=0; i<array.length; i+=1){
+  for (let i = 0; i < array.length; i += 1) {
     let index = alfabet.indexOf(array[i])
-        if(array[i+1] !== alfabet[index+1]) {
-        return alfabet[index+1]} }
-     
+    if (array[i + 1] !== alfabet[index + 1]) {
+      return alfabet[index + 1]
+    }
+  }
 }
 // ------------------------------------//
 // Given an array of integers, find the one that appears an odd number of times.
@@ -153,8 +153,33 @@ function findMissingLetter(array)
 
 function findOdd(A) {
   let res
-  A.map((val, i, arr)=> {
-   let b = A.filter((a)=> a===val)
-   if (b.length%2 !== 0 ) {return res = val}})
-  return res;
+  A.map((val, i, arr) => {
+    let b = A.filter((a) => a === val)
+    if (b.length % 2 !== 0) {
+      return (res = val)
+    }
+  })
+  return res
+}
+
+// ---------------------//
+// Write a function, persistence, that takes in a positive parameter num and returns its multiplicative persistence, which is the number of times you must multiply the digits in num until you reach a single digit.
+// For example (Input --> Output):
+// 39 --> 3 (because 3*9 = 27, 2*7 = 14, 1*4 = 4 and 4 has only one digit)
+// 999 --> 4 (because 9*9*9 = 729, 7*2*9 = 126, 1*2*6 = 12, and finally 1*2 = 2)
+// 4 --> 0 (because 4 is already a one-digit number)
+
+function persistence(num) {
+  let array = num.toString().split('')
+  let count = 0
+
+  while (array.length > 1) {
+    let res = array.reduce((acc, val, i) => {
+      return acc * Number.parseInt(val)
+    }, 1)
+    array = res.toString().split('')
+    count += 1
+  }
+
+  return count
 }
