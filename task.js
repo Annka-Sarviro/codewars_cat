@@ -195,3 +195,67 @@ var countBits = function (n) {
     return acc + parseInt(val, 10)
   }, 0)
 }
+
+
+//----------------------------//
+// Given an array (arr) as an argument complete the function countSmileys that should return the total number of smiling faces.
+// Rules for a smiling face:
+// Each smiley face must contain a valid pair of eyes. Eyes can be marked as : or ;
+// A smiley face can have a nose but it does not have to. Valid characters for a nose are - or ~
+// Every smiling face must have a smiling mouth that should be marked with either ) or D
+// No additional characters are allowed except for those mentioned.
+// Valid smiley face examples: :) :D ;-D :~)
+// Invalid smiley faces: ;( :> :} :]
+
+function countSmileys(arr) {
+return arr.filter((val) => val.length < 4)
+                .filter((val)=> val.charAt(0) === ":"|| val.charAt(0) === ";")
+                .filter((val)=> val.charAt(1) === "-"|| val.charAt(1) === "~" || val.charAt(1) === ")" || val.charAt(1) === "D")
+                .reduce((acc, val, ind, arr)=> {
+                        return val.charAt(val.length-1) === ")" || val.charAt(val.length-1) === "D" ? acc +=1 : acc},0)}
+
+
+// ---------------------------------------//
+// Write an algorithm that takes an array and moves all of the zeros to the end, preserving the order of the other elements.
+// moveZeros([false,1,0,1,2,0,1,3,"a"]) // returns[false,1,1,2,1,3,"a",0,0]
+
+function moveZeros(arr) {
+  const newArr = [];
+  const zerroArr = []
+  arr.map((value)=> {
+    value !== 0? newArr.push(value) :  zerroArr.push(value)
+  })
+  console.log(arr, newArr)
+  return [...newArr, ...zerroArr]
+}
+
+// -------------------------------------//
+// Write Number in Expanded Form
+// You will be given a number and you will need to return it as a string in Expanded Form. For example:
+// expandedForm(12); // Should return '10 + 2'
+// expandedForm(42); // Should return '40 + 2'
+// expandedForm(70304); // Should return '70000 + 300 + 4'
+
+function expandedForm(num) {
+  let string = num.toString().split('').reverse()
+  let res =[]
+  for (let i=0; i<string.length; i+=1){
+  if(string[i] !== "0")
+    {res.push(string[i] + "0".repeat(i))}  }
+return res.reverse().join(" + ")}
+
+// ------------------------------------------//
+// John has invited some friends. His list is:
+// s = "Fred:Corwill;Wilfred:Corwill;Barney:Tornbull;Betty:Tornbull;Bjon:Tornbull;Raphael:Corwill;Alfred:Corwill";
+// Could you make a program that makes this string uppercase gives it sorted in alphabetical order by last name.
+// When the last names are the same, sort them by first name. Last name and first name of a guest come in the result between parentheses separated by a comma.
+// So the result of function meeting(s) will be:
+// "(CORWILL, ALFRED)(CORWILL, FRED)(CORWILL, RAPHAEL)(CORWILL, WILFRED)(TORNBULL, BARNEY)(TORNBULL, BETTY)(TORNBULL, BJON)"
+// It can happen that in two distinct families with the same family name two people have the same first name too.
+
+function meeting(s) {
+ let friends = s.toUpperCase().split(';').map((el)=> el.split(':'))
+ let sortedFriends = friends.sort((a,b)=> a[0].localeCompare(b[0])).sort((a,b)=> a[1].localeCompare(b[1]))
+ let res = sortedFriends.map((el)=> "(" + el.reverse().join(', ') + ")")
+ return  res.join('')
+}
